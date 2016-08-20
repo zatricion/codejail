@@ -60,7 +60,7 @@ class JailCodeMixin(helpers.JailMixin):
     def assertResultOk(self, res):
         """Assert that `res` exited well (0), and had no stderr output."""
         if res.stderr:
-            print "---- stderr:\n%s" % res.stderr
+            print("---- stderr:\n%s" % res.stderr)
         self.assertEqual(res.stderr, "")        # pylint: disable=E1101
         self.assertEqual(res.status, 0)         # pylint: disable=E1101
 
@@ -243,7 +243,7 @@ class TestFeatures(JailCodeMixin, unittest.TestCase):
     def test_slugs_get_logged(self, log_log):
         jailpy(code="print 'Hello, world!'", slug="HELLO")
         log_text = text_of_logs(log_log.mock_calls)
-        self.assertRegexpMatches(log_text, r"INFO: Executed jailed code HELLO in .*, with PID .*")
+        self.assertRegex(log_text, r"INFO: Executed jailed code HELLO in .*, with PID .*")
 
 
 class TestLimits(JailCodeMixin, unittest.TestCase):
@@ -254,7 +254,7 @@ class TestLimits(JailCodeMixin, unittest.TestCase):
         self.old_limits = dict(LIMITS)
 
     def tearDown(self):
-        for name, value in self.old_limits.items():
+        for name, value in list(self.old_limits.items()):
             set_limit(name, value)
         super(TestLimits, self).tearDown()
 
@@ -299,7 +299,7 @@ class TestLimits(JailCodeMixin, unittest.TestCase):
 
         # Make sure we log that we are killing the process.
         log_text = text_of_logs(log_log.mock_calls)
-        self.assertRegexpMatches(log_text, r"WARNING: Killing process \d+")
+        self.assertRegex(log_text, r"WARNING: Killing process \d+")
 
     def test_changing_realtime_limit(self):
         # Change time limit to 2 seconds, sleeping for 1.5 will be fine.
@@ -572,7 +572,7 @@ class TestProxyProcess(JailCodeMixin, unittest.TestCase):
         pids.add(proxy.PROXY_PROCESS.pid)
 
         # Run this a number of times, to try to catch some cases.
-        for i in xrange(10):
+        for i in range(10):
             # The proxy process dies unexpectedly!
             proxy.PROXY_PROCESS.kill()
 

@@ -31,7 +31,7 @@ def run_subprocess_through_proxy(*args, **kwargs):
     This will retry a few times if need be.
 
     """
-    for tries in xrange(3):
+    for tries in range(3):
         try:
             proxy = get_proxy()
 

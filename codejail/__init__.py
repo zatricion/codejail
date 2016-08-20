@@ -20,4 +20,4 @@ from .exceptions import CodeJailException, JailError, SafeExecException
 from .jail import configure, is_configured, get_codejail
 from .languages import python2, python3, other
 
-__version__ = u'1.1'
+__version__ = '1.1'

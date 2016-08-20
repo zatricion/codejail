@@ -1,6 +1,6 @@
 """Test safe_exec.py"""
 
-from cStringIO import StringIO
+from io import StringIO
 import os.path
 import textwrap
 import unittest
@@ -85,7 +85,7 @@ class SafeExecTests(helpers.JailMixin, unittest.TestCase):
         msg = str(what_happened.exception)
         # The result may be repr'd or not, so the backslash needs to be
         # optional in this match.
-        self.assertRegexpMatches(
+        self.assertRegex(
             msg,
             r"ValueError: That\\?'s not how you pour soup!"
         )

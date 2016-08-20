@@ -6,8 +6,8 @@ GOBBLE_CHUNK = int(1e7)
 
 def main():
     gobble = []
-    for i in xrange(int(1e7)):
-        print i
+    for i in range(int(1e7)):
+        print(i)
         globs = {}
         safe_exec.safe_exec("a = 17", globs)
         assert globs["a"] == 17

@@ -2,7 +2,7 @@
 Integrate with application settings files.
 """
 
-from __future__ import absolute_import
+
 from . import jail
 from . import limits
 
@@ -41,7 +41,7 @@ def configure_from_settings(settings):
         for jail_config in settings.CODE_JAIL['jails']:
             jail.configure(**jail_config)
         requested_limits = settings.CODE_JAIL.get('limits', {})
-        for name, value in requested_limits.items():
+        for name, value in list(requested_limits.items()):
             limits.set_limit(name, value)
     else:
         legacy_configure_from_settings(settings)
@@ -64,5 +64,5 @@ def legacy_configure_from_settings(settings):
         user = settings.CODE_JAIL['user']
         jail.configure("python", python_bin, user=user)
     requested_limits = settings.CODE_JAIL.get('limits', {})
-    for name, value in requested_limits.items():
+    for name, value in list(requested_limits.items()):
         limits.set_limit(name, value)
