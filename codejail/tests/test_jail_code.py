@@ -25,7 +25,8 @@ def jailpy(code=None, *args, **kwargs):
     """Run `jail_code` on Python."""
     if code:
         code = textwrap.dedent(code)
-    return jail_code("python", code, *args, **kwargs)
+    res = jail_code("python", code, *args, **kwargs)
+    return res
 
 
 def file_here(fname):

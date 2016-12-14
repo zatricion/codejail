@@ -237,14 +237,14 @@ class Jail(object):
             # Create the main file.
             if code:
                 with open(os.path.join(homedir, "jailed_code"), "wb") as jailed:
-                    jailed.write(code)
+                    jailed.write(code.encode())
 
                 argv = ["jailed_code"] + argv
 
             # Create extra files requested by the caller:
             for name, content in extra_files or ():
                 with open(os.path.join(homedir, name), "wb") as extra:
-                    extra.write(content)
+                    extra.write(content.encode())
 
             cmd = []
 
@@ -276,7 +276,7 @@ class Jail(object):
             )
 
             # TODO: limit too much stdout/stderr data?
-            result = JailResult(status, stdout, stderr)
+            result = JailResult(status, stdout.decode(), stderr.decode())
 
             # Remove the tmptmp directory as the sandbox user since the sandbox
             # user may have written files that the application user can't

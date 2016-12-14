@@ -15,6 +15,6 @@ setup(
         "Operating System :: POSIX :: Ubuntu",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.5",
     ],
 )
